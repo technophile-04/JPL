@@ -13,7 +13,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-//import net.proteanit.sql.DbUtils;
+import net.proteanit.sql.DbUtils;
 import java.sql.ResultSet;
 /**
  *
@@ -29,7 +29,7 @@ public class Admin extends javax.swing.JFrame {
     
     public Admin() {
         initComponents();
-        getUserTable();
+        getUsersTable();
     }
 
     /**
@@ -52,7 +52,7 @@ public class Admin extends javax.swing.JFrame {
         userTable = new javax.swing.JTable();
         Hospitals = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        hospitalTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -168,8 +168,8 @@ public class Admin extends javax.swing.JFrame {
         Hospitals.setBackground(new java.awt.Color(255, 255, 255));
         Hospitals.setLayout(new javax.swing.BoxLayout(Hospitals, javax.swing.BoxLayout.LINE_AXIS));
 
-        jTable1.setForeground(new java.awt.Color(51, 51, 51));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        hospitalTable.setForeground(new java.awt.Color(51, 51, 51));
+        hospitalTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Titan", "Thane",  new Integer(100)},
                 {"Kem", "Andheri",  new Integer(200)},
@@ -188,9 +188,9 @@ public class Admin extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable1.setRowHeight(20);
-        jTable1.setSelectionBackground(new java.awt.Color(0, 126, 200));
-        jScrollPane1.setViewportView(jTable1);
+        hospitalTable.setRowHeight(20);
+        hospitalTable.setSelectionBackground(new java.awt.Color(0, 126, 200));
+        jScrollPane1.setViewportView(hospitalTable);
 
         Hospitals.add(jScrollPane1);
 
@@ -214,13 +214,26 @@ public class Admin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    void getUserTable(){
+    void getUsersTable(){
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=vaja3253");
             String sql = "select * from USER";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-//            userTable.setModel(DbUtils.resultSetToTableModel(rs));
+            userTable.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    void getHospitalsTable(){
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=vaja3253");
+            String sql = "select * from HOSPITAL";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            hospitalTable.setModel(DbUtils.resultSetToTableModel(rs));
             
         } catch (SQLException ex) {
             Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
@@ -244,6 +257,7 @@ public class Admin extends javax.swing.JFrame {
         resetLblColor(btnHospitals);
         Hospitals.setVisible(false);
         Users.setVisible(true);
+        getUsersTable();
         
     }//GEN-LAST:event_btnUsersMouseClicked
 
@@ -253,6 +267,7 @@ public class Admin extends javax.swing.JFrame {
         resetLblColor(btnUsers);
         Users.setVisible(false);
         Hospitals.setVisible(true);
+        getHospitalsTable();
 
     }//GEN-LAST:event_btnHospitalsMouseClicked
 
@@ -298,11 +313,11 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel btnHospitals;
     private javax.swing.JLabel btnUsers;
     private javax.swing.JPanel header;
+    private javax.swing.JTable hospitalTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable userTable;
     // End of variables declaration//GEN-END:variables
 }
