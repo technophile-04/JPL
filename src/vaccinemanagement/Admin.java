@@ -4,20 +4,32 @@
  */
 package vaccinemanagement;
 
+
 import java.awt.Color;
 import javax.swing.JLabel;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.proteanit.sql.DbUtils;
+import java.sql.ResultSet;
 /**
  *
  * @author shivbhonde
  */
 public class Admin extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form Admin
      */
+    Connection conn = null;
+    PreparedStatement ps = null;
+    
     public Admin() {
         initComponents();
+        getUserTable();
     }
 
     /**
@@ -37,7 +49,7 @@ public class Admin extends javax.swing.JFrame {
         AdminHome = new javax.swing.JPanel();
         Users = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        userTable = new javax.swing.JTable();
         Hospitals = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -112,8 +124,8 @@ public class Admin extends javax.swing.JFrame {
 
         Users.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable2.setForeground(new java.awt.Color(51, 51, 51));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        userTable.setForeground(new java.awt.Color(51, 51, 51));
+        userTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Shiv ", "Bhonde",  new Integer(2), "Titan"},
                 {"Aadil", "Saudagar",  new Integer(1), "Kem"},
@@ -132,9 +144,9 @@ public class Admin extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable2.setRowHeight(20);
-        jTable2.setSelectionBackground(new java.awt.Color(0, 126, 200));
-        jScrollPane2.setViewportView(jTable2);
+        userTable.setRowHeight(20);
+        userTable.setSelectionBackground(new java.awt.Color(0, 126, 200));
+        jScrollPane2.setViewportView(userTable);
 
         javax.swing.GroupLayout UsersLayout = new javax.swing.GroupLayout(Users);
         Users.setLayout(UsersLayout);
@@ -202,6 +214,19 @@ public class Admin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    void getUserTable(){
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=vaja3253");
+            String sql = "select * from USER";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            userTable.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
      public void setLblColor(JLabel lbl)
     {
         lbl.setBackground(new Color(0,94,148));
@@ -278,6 +303,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable userTable;
     // End of variables declaration//GEN-END:variables
 }
