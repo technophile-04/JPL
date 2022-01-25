@@ -29,16 +29,7 @@ public class Admin extends javax.swing.JFrame {
     
     public Admin() {
         initComponents();
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=vaja3253");
-            String sql = "select * from USER";
-            ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            userTable.setModel(DbUtils.resultSetToTableModel(rs));
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        getUserTable();
     }
 
     /**
@@ -223,6 +214,19 @@ public class Admin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    void getUserTable(){
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=vaja3253");
+            String sql = "select * from USER";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            userTable.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
      public void setLblColor(JLabel lbl)
     {
         lbl.setBackground(new Color(0,94,148));
