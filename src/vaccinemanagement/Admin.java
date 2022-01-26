@@ -13,7 +13,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.proteanit.sql.DbUtils;
+//import net.proteanit.sql.DbUtils;
 import java.sql.ResultSet;
 /**
  *
@@ -223,7 +223,7 @@ public class Admin extends javax.swing.JFrame {
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-            userTable.setModel(DbUtils.resultSetToTableModel(rs));
+//            userTable.setModel(DbUtils.resultSetToTableModel(rs));
             
         } catch (SQLException ex) {
             Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
@@ -236,7 +236,7 @@ public class Admin extends javax.swing.JFrame {
             String sql = "select * from HOSPITAL";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            hospitalTable.setModel(DbUtils.resultSetToTableModel(rs));
+//            hospitalTable.setModel(DbUtils.resultSetToTableModel(rs));
             
         } catch (SQLException ex) {
             Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
