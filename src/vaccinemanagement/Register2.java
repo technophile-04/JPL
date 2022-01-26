@@ -1,8 +1,20 @@
+package vaccinemanagement;
+
+import java.sql.Connection;
+        import java.sql.PreparedStatement;
+        import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import java.util.regex.Matcher;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vaccinemanagement;
+
 
 /**
  *
@@ -16,7 +28,8 @@ public class Register2 extends javax.swing.JFrame {
     public Register2() {
         initComponents();
     }
-
+     Connection con;
+    PreparedStatement ps;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,11 +43,9 @@ public class Register2 extends javax.swing.JFrame {
         lblRegisterIcon = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        txtNameRegister = new javax.swing.JTextField();
-        txtAgeRegister = new javax.swing.JTextField();
+        txtFirstNameRegister = new javax.swing.JTextField();
         txtSexRegister = new javax.swing.JTextField();
         txtPhoneRegister = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -45,9 +56,11 @@ public class Register2 extends javax.swing.JFrame {
         txtPasswordRegister = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        btnLogin = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
+        txtLastNameRegister = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -93,86 +106,138 @@ public class Register2 extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtNameRegister.setFont(new java.awt.Font("STIXGeneral", 0, 14)); // NOI18N
-        txtNameRegister.setForeground(new java.awt.Color(51, 51, 51));
-        txtNameRegister.setText("Enter Name...");
-        txtNameRegister.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        jPanel3.add(txtNameRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 190, 39));
-
-        txtAgeRegister.setFont(new java.awt.Font("STIXGeneral", 0, 14)); // NOI18N
-        txtAgeRegister.setForeground(new java.awt.Color(51, 51, 51));
-        txtAgeRegister.setText("Enter Age...");
-        txtAgeRegister.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        jPanel3.add(txtAgeRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 201, 39));
+        txtFirstNameRegister.setFont(new java.awt.Font("STIXGeneral", 0, 14)); // NOI18N
+        txtFirstNameRegister.setForeground(new java.awt.Color(51, 51, 51));
+        txtFirstNameRegister.setText("Enter Name...");
+        txtFirstNameRegister.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 181, 204)));
+        txtFirstNameRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtFirstNameRegisterMouseClicked(evt);
+            }
+        });
+        jPanel3.add(txtFirstNameRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 190, 39));
 
         txtSexRegister.setFont(new java.awt.Font("STIXGeneral", 0, 14)); // NOI18N
         txtSexRegister.setForeground(new java.awt.Color(51, 51, 51));
         txtSexRegister.setText("Enter Sex...");
-        txtSexRegister.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        txtSexRegister.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 181, 204)));
+        txtSexRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSexRegisterMouseClicked(evt);
+            }
+        });
         txtSexRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSexRegisterActionPerformed(evt);
             }
         });
-        jPanel3.add(txtSexRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 210, 39));
+        jPanel3.add(txtSexRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 210, 39));
 
         txtPhoneRegister.setFont(new java.awt.Font("STIXGeneral", 0, 14)); // NOI18N
         txtPhoneRegister.setForeground(new java.awt.Color(51, 51, 51));
         txtPhoneRegister.setText("Enter Phone No....");
-        txtPhoneRegister.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        jPanel3.add(txtPhoneRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 210, 220, 39));
-
-        jLabel2.setText("Age");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, -1, 36));
+        txtPhoneRegister.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 181, 204)));
+        txtPhoneRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPhoneRegisterMouseClicked(evt);
+            }
+        });
+        jPanel3.add(txtPhoneRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, 220, 39));
 
         jLabel3.setText("Email Id");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 80, 39));
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 80, 39));
 
         jLabel4.setText("Sex");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 45, 39));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 45, 39));
 
         jLabel5.setText("Address");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 299, 65, 39));
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 65, 39));
 
         txtAddressRegister.setColumns(20);
         txtAddressRegister.setLineWrap(true);
         txtAddressRegister.setRows(5);
-        txtAddressRegister.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        txtAddressRegister.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 108, 204)));
         jScrollPane1.setViewportView(txtAddressRegister);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 299, 548, 39));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 548, 39));
 
-        jLabel7.setText("Name");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 36, 65, 39));
+        jLabel7.setText("First Name");
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 36, 80, 39));
 
         txtEmailRegister.setFont(new java.awt.Font("STIXGeneral", 0, 14)); // NOI18N
         txtEmailRegister.setForeground(new java.awt.Color(51, 51, 51));
         txtEmailRegister.setText("Enter Email Id...");
-        txtEmailRegister.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        jPanel3.add(txtEmailRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 201, 39));
+        txtEmailRegister.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 181, 204)));
+        txtEmailRegister.setCaretColor(new java.awt.Color(0, 181, 204));
+        txtEmailRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtEmailRegisterMouseClicked(evt);
+            }
+        });
+        jPanel3.add(txtEmailRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 201, 39));
 
         txtPasswordRegister.setText("jPasswordField2");
-        txtPasswordRegister.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        jPanel3.add(txtPasswordRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 200, 30));
+        txtPasswordRegister.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 181, 204)));
+        txtPasswordRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPasswordRegisterMouseClicked(evt);
+            }
+        });
+        jPanel3.add(txtPasswordRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 200, 30));
 
         jLabel6.setText("Phone No");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 120, -1));
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 120, -1));
 
         jLabel8.setText("Password");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 230, 120, -1));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 120, -1));
 
-        btnLogin.setBackground(new java.awt.Color(255, 255, 255));
-        btnLogin.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnLogin.setForeground(new java.awt.Color(0, 181, 204));
-        btnLogin.setText("Register");
-        btnLogin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 181, 204), 1, true));
-        jPanel3.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, 130, 40));
+        btnRegister.setBackground(new java.awt.Color(255, 255, 255));
+        btnRegister.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnRegister.setForeground(new java.awt.Color(0, 181, 204));
+        btnRegister.setText("Register");
+        btnRegister.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 181, 204), 1, true));
+        btnRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegisterMouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, 130, 40));
+
+        txtLastNameRegister.setFont(new java.awt.Font("STIXGeneral", 0, 14)); // NOI18N
+        txtLastNameRegister.setForeground(new java.awt.Color(51, 51, 51));
+        txtLastNameRegister.setText("Enter Name...");
+        txtLastNameRegister.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 181, 204)));
+        txtLastNameRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtLastNameRegisterMouseClicked(evt);
+            }
+        });
+        txtLastNameRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLastNameRegisterActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtLastNameRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, 190, 39));
+
+        jLabel9.setText("Last Name");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 80, 39));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 720, 440));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    public static boolean valEmail(String input)
+    {
+        String emailRegex= "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+        Pattern emailPat=Pattern.compile(emailRegex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher=emailPat.matcher(input);
+        return matcher.find();
+    }
+    
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
         this.dispose();
@@ -181,6 +246,98 @@ public class Register2 extends javax.swing.JFrame {
     private void txtSexRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSexRegisterActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSexRegisterActionPerformed
+
+    private void txtLastNameRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLastNameRegisterMouseClicked
+        // TODO add your handling code here:
+        txtLastNameRegister.setText("");
+    }//GEN-LAST:event_txtLastNameRegisterMouseClicked
+
+    private void txtLastNameRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastNameRegisterActionPerformed
+        // TODO add your handling code here:
+        txtLastNameRegister.setText("");
+    }//GEN-LAST:event_txtLastNameRegisterActionPerformed
+
+    private void btnRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseClicked
+        // TODO add your handling code here:
+        
+         String lastName=txtLastNameRegister.getText();
+        String firstName=txtFirstNameRegister.getText();
+        String sex=txtSexRegister.getText();
+        String password=txtPasswordRegister.getText();
+        String phone=txtPhoneRegister.getText();
+       int PhoneNo;
+        PhoneNo = 0;
+       try{
+        PhoneNo=Integer.parseInt(txtPhoneRegister.getText());
+       }catch(Exception e)
+       {
+           JOptionPane.showMessageDialog(this, "Enter a valid Phone Number");
+           return ;
+       }
+           
+        String address=txtAddressRegister.getText();
+        String email=txtEmailRegister.getText();
+        
+        if(lastName.equals("")||firstName.equals("")||sex.equals("")||password.equals("")||phone.equals("")||address.equals("")||email.equals(""))
+        {
+            JOptionPane.showMessageDialog(this, "Fill in all the Fields!");
+            System.out.println("Mabsj");
+            return ;
+        }
+        
+         if(!valEmail(email))
+        {
+            JOptionPane.showMessageDialog(Register2.this, "Enter a valid Email");
+            return ;
+        }
+        
+       
+        
+             try {
+                 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=aadil123");
+                 ps=con.prepareStatement("insert into user(last_name,first_name,email_id,password,address,phoneNumber,gender) values(?,?,?,?,?,?,?)");
+            ps.setString(1, lastName);
+            ps.setString(2, firstName);
+            ps.setString(3, email);
+            ps.setString(4, password);
+            ps.setString(5, address);
+            ps.setInt(6, PhoneNo);
+            ps.setString(7, sex);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(Register2.this,"User added");
+             } catch (SQLException ex) {
+                 Logger.getLogger(Register2.class.getName()).log(Level.SEVERE, null, ex);
+                 
+             }
+        
+        this.dispose();
+//        new Welcome2().setVisible(true);
+    }//GEN-LAST:event_btnRegisterMouseClicked
+
+    private void txtFirstNameRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFirstNameRegisterMouseClicked
+        // TODO add your handling code here:
+        txtFirstNameRegister.setText("");
+    }//GEN-LAST:event_txtFirstNameRegisterMouseClicked
+
+    private void txtEmailRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmailRegisterMouseClicked
+        // TODO add your handling code here:
+        txtEmailRegister.setText("");
+    }//GEN-LAST:event_txtEmailRegisterMouseClicked
+
+    private void txtSexRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSexRegisterMouseClicked
+        // TODO add your handling code here:
+        txtSexRegister.setText("");
+    }//GEN-LAST:event_txtSexRegisterMouseClicked
+
+    private void txtPasswordRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordRegisterMouseClicked
+        // TODO add your handling code here:
+        txtPasswordRegister.setText("");
+    }//GEN-LAST:event_txtPasswordRegisterMouseClicked
+
+    private void txtPhoneRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPhoneRegisterMouseClicked
+        // TODO add your handling code here:
+        txtPhoneRegister.setText("");
+    }//GEN-LAST:event_txtPhoneRegisterMouseClicked
 
     /**
      * @param args the command line arguments
@@ -218,23 +375,23 @@ public class Register2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnRegister;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblRegisterIcon;
     private javax.swing.JTextArea txtAddressRegister;
-    private javax.swing.JTextField txtAgeRegister;
     private javax.swing.JTextField txtEmailRegister;
-    private javax.swing.JTextField txtNameRegister;
+    private javax.swing.JTextField txtFirstNameRegister;
+    private javax.swing.JTextField txtLastNameRegister;
     private javax.swing.JPasswordField txtPasswordRegister;
     private javax.swing.JTextField txtPhoneRegister;
     private javax.swing.JTextField txtSexRegister;
