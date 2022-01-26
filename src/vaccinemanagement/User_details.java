@@ -4,6 +4,15 @@
  */
 package vaccinemanagement;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author prati
@@ -13,8 +22,38 @@ public class User_details extends javax.swing.JFrame {
     /**
      * Creates new form User_details
      */
+    Connection conn = null;
+    PreparedStatement ps = null;
     public User_details() {
         initComponents();
+        getUser();
+    }
+    
+    public void getUser(){
+         try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=vaja3253");
+            String sql = "select u_id,first_name,last_name,address,phoneNumber,gender,vaccination_date,age,email_id from USER where u_id=?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, LoginSession.u_id);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                txt_address.setText(rs.getString("address"));
+                txt_age.setText(rs.getString("age"));
+                txt_name.setText(rs.getString("first_name")+" "+rs.getString("last_name"));
+                txt_email.setText(rs.getString("email_id"));
+                txt_phoneNo.setText(String.valueOf(rs.getInt("phoneNumber")));
+                txt_sex.setText(rs.getString("gender"));
+                if(rs.getString("vaccination_date") == null){
+                    txt_vaccinationStatus.setText("Please book a slot");
+                }else{
+                    Date dateObj = rs.getDate("vaccination_date");
+                    txt_vaccinationStatus.setText(dateObj.toString());
+                }
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -97,6 +136,11 @@ public class User_details extends javax.swing.JFrame {
         btn_LogOut.setForeground(new java.awt.Color(0, 102, 102));
         btn_LogOut.setText("Log Out");
         btn_LogOut.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btn_LogOut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_LogOutMouseClicked(evt);
+            }
+        });
         btn_LogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_LogOutActionPerformed(evt);
@@ -273,6 +317,7 @@ public class User_details extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -287,13 +332,23 @@ public class User_details extends javax.swing.JFrame {
 
     private void btn_LogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LogOutActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+//        this.dispose();
     }//GEN-LAST:event_btn_LogOutActionPerformed
 
     private void lbl_exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_exitMouseClicked
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_lbl_exitMouseClicked
+
+    private void btn_LogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LogOutMouseClicked
+        // TODO add your handling code here:
+        LoginSession.firstName = "";
+        LoginSession.lastName = "";
+        LoginSession.u_id = 0;
+        LoginSession.userType= 0;
+        this.dispose();
+        new Welcome2().setVisible(true);
+    }//GEN-LAST:event_btn_LogOutMouseClicked
 
     /**
      * @param args the command line arguments

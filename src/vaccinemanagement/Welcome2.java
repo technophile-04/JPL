@@ -4,6 +4,16 @@
  */
 package vaccinemanagement;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
+
 /**
  *
  * @author aadilsaudagar
@@ -13,6 +23,10 @@ public class Welcome2 extends javax.swing.JFrame {
     /**
      * Creates new form Welcome2
      */
+    
+    Connection conn = null;
+    PreparedStatement ps = null;
+    
     public Welcome2() {
         initComponents();
     }
@@ -126,6 +140,11 @@ public class Welcome2 extends javax.swing.JFrame {
         btnLogin.setForeground(new java.awt.Color(0, 181, 204));
         btnLogin.setText("Login");
         btnLogin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 181, 204), 1, true));
+        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLoginMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout lblPasswordLayout = new javax.swing.GroupLayout(lblPassword);
         lblPassword.setLayout(lblPasswordLayout);
@@ -180,8 +199,32 @@ public class Welcome2 extends javax.swing.JFrame {
         getContentPane().add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 330, 400));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public boolean loginUser(String email, String password){
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=vaja3253");
+            String sql = "select u_id, first_name, last_name, isAdmin from USER where email_id=? and password=?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                LoginSession.u_id = rs.getInt("u_id");
+                LoginSession.firstName = rs.getString("first_name");
+                LoginSession.lastName = rs.getString("last_name");
+                LoginSession.userType = rs.getInt("isAdmin"); 
+                return true;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
+    
     private void txtUsernameLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsernameLoginMouseClicked
         // TODO add your handling code here:
         txtUsernameLogin.setText("");
@@ -202,6 +245,23 @@ public class Welcome2 extends javax.swing.JFrame {
         this.dispose();
         new Register2().setVisible(true);
     }//GEN-LAST:event_btnRegisterMouseClicked
+
+    private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
+        // TODO add your handling code here:
+        String email = txtUsernameLogin.getText();
+        String password =  txtPasswrodLogin.getText();
+        if(loginUser(email, password)){
+            
+            if(LoginSession.userType == 0){
+                new HomePage().setVisible(true);
+            }else{
+                new Admin().setVisible(true);
+            }
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "Please enter correct details!");
+        }
+    }//GEN-LAST:event_btnLoginMouseClicked
 
     /**
      * @param args the command line arguments
