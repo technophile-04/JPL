@@ -220,7 +220,11 @@ public class Admin extends javax.swing.JFrame {
             String sql = "select * from USER";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+<<<<<<< HEAD
             //userTable.setModel(DbUtils.resultSetToTableModel(rs));
+=======
+//            userTable.setModel(DbUtils.resultSetToTableModel(rs));
+>>>>>>> 30d179d9c04d18938f48e5d42d3099c326d22f1e
             
         } catch (SQLException ex) {
             Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
