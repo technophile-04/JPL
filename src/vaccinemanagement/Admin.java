@@ -223,6 +223,7 @@ public class Admin extends javax.swing.JFrame {
             String sql = "select * from USER";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+<<<<<<< HEAD
             userTable.setModel(DbUtils.resultSetToTableModel(rs));
             
         } catch (SQLException ex) {
@@ -237,6 +238,8 @@ public class Admin extends javax.swing.JFrame {
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             hospitalTable.setModel(DbUtils.resultSetToTableModel(rs));
+=======
+>>>>>>> 0ae7889bee029c0a86f0c1ab249d207dbbdc8656
             
         } catch (SQLException ex) {
             Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);

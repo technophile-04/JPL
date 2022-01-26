@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package vaccinemanagement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.DriverManager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,8 +25,14 @@ public class User_details extends javax.swing.JFrame {
     /**
      * Creates new form User_details
      */
+<<<<<<< HEAD
     Connection conn = null;
     PreparedStatement ps = null;
+=======
+    Connection con;
+    PreparedStatement ps;
+    
+>>>>>>> 0ae7889bee029c0a86f0c1ab249d207dbbdc8656
     public User_details() {
         initComponents();
         getUser();
