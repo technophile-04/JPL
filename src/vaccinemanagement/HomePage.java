@@ -3,18 +3,62 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package vaccinemanagement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author prati
  */
 public class HomePage extends javax.swing.JFrame {
+    Connection con;
+    PreparedStatement ps;
+    
 
     /**
      * Creates new form HomePage
      */
+    
+    int flag =0 ;
+    
     public HomePage() {
         initComponents();
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/vaccine_management?user=root&password=pratik02");
+           // ps=con.prepareStatement("insert into hospital");
+           String sql="Select * from hospital where h_id like 1";
+           ps=con.prepareStatement(sql);
+           ResultSet rs = ps.executeQuery();
+           while(rs.next()){
+               lbl_hospital1.setText(rs.getString("name"));
+               txt_vaccine1.setText(rs.getString("stock"));
+           }
+           sql="Select * from hospital where h_id like 2";
+           ps=con.prepareStatement(sql);
+           ResultSet rs2 = ps.executeQuery();
+           while(rs2.next()){
+               lbl_hospital2.setText(rs2.getString("name"));
+               txt_vaccine2.setText(rs2.getString("stock"));
+           }
+           sql="Select * from hospital where h_id like 3";
+           ps=con.prepareStatement(sql);
+           ResultSet rs3 = ps.executeQuery();
+           while(rs3.next()){
+               lbl_hospital3.setText(rs3.getString("name"));
+               txt_vaccine3.setText(rs3.getString("stock"));
+           }
+           
+           ps.executeUpdate();
+                    } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     /**
@@ -102,6 +146,11 @@ public class HomePage extends javax.swing.JFrame {
         txt_vaccine1.setText(" 20");
 
         btn_book1.setText("BOOK");
+        btn_book1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_book1ActionPerformed(evt);
+            }
+        });
 
         lbl_available1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_available1.setText("Available VACCINES:");
@@ -113,11 +162,11 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(lbl_hospital1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(lbl_available1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_vaccine1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
+                .addGap(58, 58, 58)
                 .addComponent(btn_book1)
                 .addGap(56, 56, 56))
         );
@@ -148,6 +197,11 @@ public class HomePage extends javax.swing.JFrame {
         txt_vaccine2.setText("0");
 
         btn_book2.setText("BOOK");
+        btn_book2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_book2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -191,6 +245,11 @@ public class HomePage extends javax.swing.JFrame {
         txt_vaccine3.setText("10");
 
         btn_book3.setText("BOOK");
+        btn_book3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_book3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -287,6 +346,98 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_lbl_exitMouseClicked
+    
+    private void btn_book1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_book1ActionPerformed
+        if(flag==0){
+        try {
+            // TODO add your handling code here:
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/vaccine_management?user=root&password=pratik02");
+            String sql = "Select stock from hospital where h_id like 1";
+            ps=con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                int x=Integer.parseInt(rs.getString("stock"));
+                if(x>0){
+                txt_vaccine1.setText(Integer.toString(--x));
+                String sql_decrementStock="UPDATE hospital SET stock = stock - 1 where h_id like 1 AND stock > 0";
+                ps=con.prepareStatement(sql_decrementStock);
+                ps.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Vaccine booked succcessfully");
+                flag=1;
+
+                }else{
+                     JOptionPane.showMessageDialog(this, "Vaccine not available");
+                }
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+        
+    }//GEN-LAST:event_btn_book1ActionPerformed
+
+    private void btn_book2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_book2ActionPerformed
+        // TODO add your handling code here:
+        if(flag==0){
+         try {
+            // TODO add your handling code here:
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/vaccine_management?user=root&password=pratik02");
+            String sql = "Select stock from hospital where h_id like 2";
+            ps=con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                int x=Integer.parseInt(rs.getString("stock"));
+                if(x>0){
+                txt_vaccine2.setText(Integer.toString(--x));
+                String sql_decrementStock="UPDATE hospital SET stock = stock - 1 where h_id like 2 AND stock > 0";
+                ps=con.prepareStatement(sql_decrementStock);
+                ps.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Vaccine booked succcessfully");
+                flag=1;
+                }else{
+                    JOptionPane.showMessageDialog(this, "Vaccine not available");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+        
+    }//GEN-LAST:event_btn_book2ActionPerformed
+
+    private void btn_book3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_book3ActionPerformed
+        // TODO add your handling code here:
+        if(flag==0){ 
+        try {
+            // TODO add your handling code here:
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/vaccine_management?user=root&password=pratik02");
+            String sql = "Select stock from hospital where h_id like 3";
+            ps=con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                int x=Integer.parseInt(rs.getString("stock"));
+                if(x>0){
+                txt_vaccine3.setText(Integer.toString(--x));
+                String sql_decrementStock="UPDATE hospital SET stock = stock - 1 where h_id like 3 AND stock > 0";
+                ps=con.prepareStatement(sql_decrementStock);
+                ps.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Vaccine booked succcessfully");
+                flag=1;
+                }else{
+                   JOptionPane.showMessageDialog(this, "Vaccine not available");
+                }
+                 
+                 
+                
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+    }//GEN-LAST:event_btn_book3ActionPerformed
 
     /**
      * @param args the command line arguments
