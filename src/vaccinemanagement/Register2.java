@@ -294,8 +294,8 @@ public class Register2 extends javax.swing.JFrame {
        
         
              try {
-                 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=aadil123");
-                 ps=con.prepareStatement("insert into user(last_name,first_name,email_id,password,address,phoneNumber,gender) values(?,?,?,?,?,?,?)");
+                 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=vaja3253");
+                 ps=con.prepareStatement("insert into user(last_name,first_name,email_id,password,address,phoneNumber,gender, age) values(?,?,?,?,?,?,?, 19)");
             ps.setString(1, lastName);
             ps.setString(2, firstName);
             ps.setString(3, email);
@@ -311,7 +311,7 @@ public class Register2 extends javax.swing.JFrame {
              }
         
         this.dispose();
-//        new Welcome2().setVisible(true);
+        new Welcome2().setVisible(true);
     }//GEN-LAST:event_btnRegisterMouseClicked
 
     private void txtFirstNameRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFirstNameRegisterMouseClicked

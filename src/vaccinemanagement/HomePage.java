@@ -30,7 +30,7 @@ public class HomePage extends javax.swing.JFrame {
     public HomePage() {
         initComponents();
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/vaccine_management?user=root&password=pratik02");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=vaja3253");
            // ps=con.prepareStatement("insert into hospital");
            String sql="Select * from hospital where h_id like 1";
            ps=con.prepareStatement(sql);
@@ -94,6 +94,7 @@ public class HomePage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 204, 204));
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -352,7 +353,7 @@ public class HomePage extends javax.swing.JFrame {
         if(flag==0){
         try {
             // TODO add your handling code here:
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/vaccine_management?user=root&password=pratik02");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=vaja3253");
             String sql = "Select stock from hospital where h_id like 1";
             ps=con.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
@@ -383,7 +384,7 @@ public class HomePage extends javax.swing.JFrame {
         if(flag==0){
          try {
             // TODO add your handling code here:
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/vaccine_management?user=root&password=pratik02");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=vaja3253");
             String sql = "Select stock from hospital where h_id like 2";
             ps=con.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
@@ -412,7 +413,7 @@ public class HomePage extends javax.swing.JFrame {
         if(flag==0){ 
         try {
             // TODO add your handling code here:
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/vaccine_management?user=root&password=pratik02");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=vaja3253");
             String sql = "Select stock from hospital where h_id like 3";
             ps=con.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();

@@ -56,14 +56,14 @@ public class Admin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        header.setBackground(new java.awt.Color(0, 126, 200));
+        header.setBackground(new java.awt.Color(0, 181, 204));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("ADMIN DASHBOARD");
 
-        btnUsers.setBackground(new java.awt.Color(0, 94, 148));
+        btnUsers.setBackground(new java.awt.Color(0, 153, 153));
         btnUsers.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         btnUsers.setForeground(new java.awt.Color(255, 255, 255));
         btnUsers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -75,7 +75,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        btnHospitals.setBackground(new java.awt.Color(0, 126, 200));
+        btnHospitals.setBackground(new java.awt.Color(0, 184, 200));
         btnHospitals.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         btnHospitals.setForeground(new java.awt.Color(255, 255, 255));
         btnHospitals.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -95,14 +95,14 @@ public class Admin extends javax.swing.JFrame {
         headerLayout.setHorizontalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(headerLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
                         .addComponent(btnUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnHospitals, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(headerLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
+                        .addGap(48, 48, 48)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -115,11 +115,10 @@ public class Admin extends javax.swing.JFrame {
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHospitals, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(btnHospitals, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         AdminHome.setLayout(new java.awt.CardLayout());
@@ -147,7 +146,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
         userTable.setRowHeight(20);
-        userTable.setSelectionBackground(new java.awt.Color(0, 126, 200));
+        userTable.setSelectionBackground(new java.awt.Color(0, 181, 204));
         jScrollPane2.setViewportView(userTable);
 
         javax.swing.GroupLayout UsersLayout = new javax.swing.GroupLayout(Users);
@@ -191,7 +190,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
         hospitalTable.setRowHeight(20);
-        hospitalTable.setSelectionBackground(new java.awt.Color(0, 126, 200));
+        hospitalTable.setSelectionBackground(new java.awt.Color(0, 181, 204));
         jScrollPane1.setViewportView(hospitalTable);
 
         Hospitals.add(jScrollPane1);
@@ -223,7 +222,7 @@ public class Admin extends javax.swing.JFrame {
             String sql = "select * from USER";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-<<<<<<< HEAD
+
             userTable.setModel(DbUtils.resultSetToTableModel(rs));
             
         } catch (SQLException ex) {
@@ -238,8 +237,6 @@ public class Admin extends javax.swing.JFrame {
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             hospitalTable.setModel(DbUtils.resultSetToTableModel(rs));
-=======
->>>>>>> 0ae7889bee029c0a86f0c1ab249d207dbbdc8656
             
         } catch (SQLException ex) {
             Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
@@ -248,12 +245,12 @@ public class Admin extends javax.swing.JFrame {
     
      public void setLblColor(JLabel lbl)
     {
-        lbl.setBackground(new Color(0,94,148));
+        lbl.setBackground(new Color(0,153,153));
     }
     
       public void resetLblColor(JLabel lbl)
     {
-        lbl.setBackground(new Color(0,126,200));
+        lbl.setBackground(new Color(0,184,200));
     }
     
     
