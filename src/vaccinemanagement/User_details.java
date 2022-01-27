@@ -384,6 +384,7 @@ public class User_details extends javax.swing.JFrame {
         LoginSession.lastName = "";
         LoginSession.u_id = 0;
         LoginSession.userType= 0;
+        LoginSession.vaccineDate="";
         this.dispose();
         new Welcome2().setVisible(true);
     }//GEN-LAST:event_btn_LogOutMouseClicked

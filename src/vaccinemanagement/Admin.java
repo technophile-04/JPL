@@ -13,7 +13,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.proteanit.sql.DbUtils;
+//import net.proteanit.sql.DbUtils;
 import java.sql.ResultSet;
 /**
  *
@@ -41,11 +41,13 @@ public class Admin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         header = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnUsers = new javax.swing.JLabel();
         btnHospitals = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        logOutBtn = new javax.swing.JLabel();
         AdminHome = new javax.swing.JPanel();
         Users = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -54,7 +56,21 @@ public class Admin extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         hospitalTable = new javax.swing.JTable();
 
+        jInternalFrame1.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         header.setBackground(new java.awt.Color(0, 181, 204));
 
@@ -90,23 +106,31 @@ public class Admin extends javax.swing.JFrame {
         jLabel2.setBackground(new java.awt.Color(0, 126, 200));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vaccinemanagement/admin.png"))); // NOI18N
 
+        logOutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vaccinemanagement/dfResized-removebg.png"))); // NOI18N
+        logOutBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logOutBtnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
         header.setLayout(headerLayout);
         headerLayout.setHorizontalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerLayout.createSequentialGroup()
-                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(headerLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(btnUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnHospitals, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(headerLayout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(35, 35, 35)
+                .addComponent(btnUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnHospitals, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(headerLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logOutBtn)
+                .addGap(31, 31, 31))
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +138,10 @@ public class Admin extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(headerLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(logOutBtn)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,7 +251,7 @@ public class Admin extends javax.swing.JFrame {
             ResultSet rs = ps.executeQuery();
 
 
-            userTable.setModel(DbUtils.resultSetToTableModel(rs));
+//            userTable.setModel(DbUtils.resultSetToTableModel(rs));
 
             
         } catch (SQLException ex) {
@@ -239,7 +266,7 @@ public class Admin extends javax.swing.JFrame {
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-            hospitalTable.setModel(DbUtils.resultSetToTableModel(rs));
+//            hospitalTable.setModel(DbUtils.resultSetToTableModel(rs));
             
         } catch (SQLException ex) {
             Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
@@ -276,6 +303,17 @@ public class Admin extends javax.swing.JFrame {
         getHospitalsTable();
 
     }//GEN-LAST:event_btnHospitalsMouseClicked
+
+    private void logOutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnMouseClicked
+        // TODO add your handling code here:
+        LoginSession.firstName = "";
+        LoginSession.lastName = "";
+        LoginSession.u_id = 0;
+        LoginSession.userType= 0;
+        LoginSession.vaccineDate="";
+        this.dispose();
+        new Welcome2().setVisible(true);
+    }//GEN-LAST:event_logOutBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -320,10 +358,12 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel btnUsers;
     private javax.swing.JPanel header;
     private javax.swing.JTable hospitalTable;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel logOutBtn;
     private javax.swing.JTable userTable;
     // End of variables declaration//GEN-END:variables
 }
