@@ -62,9 +62,9 @@ public class HomePage extends javax.swing.JFrame {
         }
         
         if(!LoginSession.vaccineDate.isEmpty()){
-            btn_book1.setVisible(false);
-            btn_book2.setVisible(false);
-            btn_book3.setVisible(false);
+            btn_book1.setEnabled(false);
+            btn_book2.setEnabled(false);
+            btn_book3.setEnabled(false);
         }
         
     }
@@ -382,9 +382,10 @@ public class HomePage extends javax.swing.JFrame {
                 ps.setInt(1, LoginSession.u_id);
                 ps.executeUpdate();
                 //Hidding the book hospital button
-                btn_book1.setVisible(false);
-                btn_book2.setVisible(false);
-                btn_book3.setVisible(false);
+                btn_book1.setEnabled(false);
+                btn_book2.setEnabled(false);
+                btn_book3.setEnabled(false);
+                btn_book1.setText("Booked");
                 LoginSession.vaccineDate = "2022-08-04";
 
                 flag=1;
@@ -426,9 +427,10 @@ public class HomePage extends javax.swing.JFrame {
                 ps.setInt(1, LoginSession.u_id);
                 ps.executeUpdate();
                 //Hidding the book hospital button
-                btn_book1.setVisible(false);
-                btn_book2.setVisible(false);
-                btn_book3.setVisible(false);
+                btn_book1.setEnabled(false);
+                btn_book2.setEnabled(false);
+                btn_book3.setEnabled(false);
+                btn_book2.setText("Booked");
                 LoginSession.vaccineDate = "2022-08-04";
                 flag=1;
                 JOptionPane.showMessageDialog(this, "Vaccine booked succcessfully");
@@ -465,9 +467,10 @@ public class HomePage extends javax.swing.JFrame {
                 ps.setInt(1, LoginSession.u_id);
                 ps.executeUpdate();
                 //Hidding the book hospital button
-                btn_book1.setVisible(false);
-                btn_book2.setVisible(false);
-                btn_book3.setVisible(false);
+                btn_book1.setEnabled(false);
+                btn_book2.setEnabled(false);
+                btn_book3.setEnabled(false);
+                btn_book3.setText("Booked");
                 LoginSession.vaccineDate = "2022-08-04";
                 flag=1;
                 JOptionPane.showMessageDialog(this, "Vaccine booked succcessfully");
