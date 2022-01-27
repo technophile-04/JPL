@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -214,7 +215,7 @@ public class Welcome2 extends javax.swing.JFrame {
     public boolean loginUser(String email, String password){
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=vaja3253");
-            String sql = "select u_id, first_name, last_name, isAdmin from USER where email_id=? and password=?";
+            String sql = "select u_id, first_name, last_name, isAdmin,vaccination_date from USER where email_id=? and password=?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, email);
             ps.setString(2, password);
@@ -223,7 +224,13 @@ public class Welcome2 extends javax.swing.JFrame {
                 LoginSession.u_id = rs.getInt("u_id");
                 LoginSession.firstName = rs.getString("first_name");
                 LoginSession.lastName = rs.getString("last_name");
-                LoginSession.userType = rs.getInt("isAdmin"); 
+                LoginSession.userType = rs.getInt("isAdmin");
+                if(rs.getString("vaccination_date") == null){
+                    LoginSession.vaccineDate="";
+                }else{
+                    Date dateObj = rs.getDate("vaccination_date");
+                    LoginSession.vaccineDate = dateObj.toString();
+                }
                 return true;
             }
             

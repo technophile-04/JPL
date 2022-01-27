@@ -14,4 +14,5 @@ public class LoginSession {
     public static String lastName;
     public static boolean isLoggedIn = false;
     public static int userType = 0;
+    public static String vaccineDate = "";
 }

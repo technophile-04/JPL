@@ -55,8 +55,16 @@ public class HomePage extends javax.swing.JFrame {
            }
            
            ps.executeUpdate();
-                    } catch (SQLException ex) {
+           
+                    
+        } catch (SQLException ex) {
             Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(!LoginSession.vaccineDate.isEmpty()){
+            btn_book1.setVisible(false);
+            btn_book2.setVisible(false);
+            btn_book3.setVisible(false);
         }
         
     }
@@ -368,8 +376,20 @@ public class HomePage extends javax.swing.JFrame {
                 String sql_decrementStock="UPDATE hospital SET stock = stock - 1 where h_id like 1 AND stock > 0";
                 ps=con.prepareStatement(sql_decrementStock);
                 ps.executeUpdate();
-                    JOptionPane.showMessageDialog(this, "Vaccine booked succcessfully");
+                //Updating user vaccination date
+                String sql_SetDate = "UPDATE USER set vaccination_date = '2002-08-04', h_id=1 where u_id = ?";
+                ps=con.prepareStatement(sql_SetDate);
+                ps.setInt(1, LoginSession.u_id);
+                ps.executeUpdate();
+                //Hidding the book hospital button
+                btn_book1.setVisible(false);
+                btn_book2.setVisible(false);
+                btn_book3.setVisible(false);
+                LoginSession.vaccineDate = "2022-08-04";
+
                 flag=1;
+                JOptionPane.showMessageDialog(this, "Vaccine booked succcessfully");
+
 
                 }else{
                      JOptionPane.showMessageDialog(this, "Vaccine not available");
@@ -392,15 +412,26 @@ public class HomePage extends javax.swing.JFrame {
             String sql = "Select stock from hospital where h_id like 2";
             ps=con.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
-            while(rs.next()){
+           while(rs.next()){
                 int x=Integer.parseInt(rs.getString("stock"));
                 if(x>0){
                 txt_vaccine2.setText(Integer.toString(--x));
+                //Updating the hopital slot
                 String sql_decrementStock="UPDATE hospital SET stock = stock - 1 where h_id like 2 AND stock > 0";
                 ps=con.prepareStatement(sql_decrementStock);
                 ps.executeUpdate();
-                    JOptionPane.showMessageDialog(this, "Vaccine booked succcessfully");
+                //Updating user vaccination date
+                String sql_SetDate = "UPDATE USER set vaccination_date = '2002-08-04',h_id=2 where u_id = ?";
+                ps=con.prepareStatement(sql_SetDate);
+                ps.setInt(1, LoginSession.u_id);
+                ps.executeUpdate();
+                //Hidding the book hospital button
+                btn_book1.setVisible(false);
+                btn_book2.setVisible(false);
+                btn_book3.setVisible(false);
+                LoginSession.vaccineDate = "2022-08-04";
                 flag=1;
+                JOptionPane.showMessageDialog(this, "Vaccine booked succcessfully");
                 }else{
                     JOptionPane.showMessageDialog(this, "Vaccine not available");
                 }
@@ -428,14 +459,22 @@ public class HomePage extends javax.swing.JFrame {
                 String sql_decrementStock="UPDATE hospital SET stock = stock - 1 where h_id like 3 AND stock > 0";
                 ps=con.prepareStatement(sql_decrementStock);
                 ps.executeUpdate();
-                    JOptionPane.showMessageDialog(this, "Vaccine booked succcessfully");
+                //Updating user vaccination date
+                String sql_SetDate = "UPDATE USER set vaccination_date = '2002-08-04', h_id=3 where u_id = ?";
+                ps=con.prepareStatement(sql_SetDate);
+                ps.setInt(1, LoginSession.u_id);
+                ps.executeUpdate();
+                //Hidding the book hospital button
+                btn_book1.setVisible(false);
+                btn_book2.setVisible(false);
+                btn_book3.setVisible(false);
+                LoginSession.vaccineDate = "2022-08-04";
                 flag=1;
+                JOptionPane.showMessageDialog(this, "Vaccine booked succcessfully");
+
                 }else{
                    JOptionPane.showMessageDialog(this, "Vaccine not available");
                 }
-                 
-                 
-                
             }
             
             

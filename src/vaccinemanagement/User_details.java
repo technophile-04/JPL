@@ -36,7 +36,7 @@ public class User_details extends javax.swing.JFrame {
     public void getUser(){
          try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=vaja3253");
-            String sql = "select u_id,first_name,last_name,address,phoneNumber,gender,vaccination_date,age,email_id from USER where u_id=?";
+            String sql = "select u_id,first_name,last_name,address,phoneNumber,gender,vaccination_date,age,email_id,h_id from USER where u_id=?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, LoginSession.u_id);
             ResultSet rs = ps.executeQuery();
@@ -48,10 +48,24 @@ public class User_details extends javax.swing.JFrame {
                 txt_phoneNo.setText(String.valueOf(rs.getInt("phoneNumber")));
                 txt_sex.setText(rs.getString("gender"));
                 if(rs.getString("vaccination_date") == null){
-                    txt_vaccinationStatus.setText("Please book a slot");
+                txt_vaccinationStatus.setText("Please book a slot");
+                lbl_hospAddress.setVisible(false);
+                txt_hospAddress.setVisible(false);
                 }else{
                     Date dateObj = rs.getDate("vaccination_date");
                     txt_vaccinationStatus.setText(dateObj.toString());
+                    sql = "select address from HOSPITAL where h_id=?";
+                    ps = conn.prepareStatement(sql);
+                    ps.setInt(1, rs.getInt("h_id"));
+                    ResultSet result = ps.executeQuery();
+                    if(result.next()){
+                        lbl_hospAddress.setVisible(true);
+                        txt_hospAddress.setVisible(true);
+                        System.out.println("INSIDE ADDRESS"+result.getString("address"));
+                        txt_hospAddress.setText(result.getString("address"));
+                    }
+
+
                 }
                 
             }
@@ -87,6 +101,8 @@ public class User_details extends javax.swing.JFrame {
         txt_vaccinationStatus = new javax.swing.JTextField();
         txt_email = new javax.swing.JTextField();
         txt_phoneNo = new javax.swing.JTextField();
+        lbl_hospAddress = new javax.swing.JLabel();
+        txt_hospAddress = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lbl_exit = new javax.swing.JLabel();
 
@@ -185,10 +201,29 @@ public class User_details extends javax.swing.JFrame {
             }
         });
 
+        lbl_hospAddress.setFont(new java.awt.Font("Lucida Sans", 1, 22)); // NOI18N
+        lbl_hospAddress.setForeground(new java.awt.Color(0, 181, 204));
+        lbl_hospAddress.setText("Hospital:");
+
+        txt_hospAddress.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_hospAddress.setText("8108871866");
+        txt_hospAddress.setBorder(null);
+        txt_hospAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_hospAddressActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_LogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,10 +239,6 @@ public class User_details extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(lbl_phoneNo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_phoneNo, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(lbl_address)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_address, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -222,15 +253,17 @@ public class User_details extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(lbl_name)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 33, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_LogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56))
+                                .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lbl_phoneNo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_phoneNo, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 27, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lbl_hospAddress)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_hospAddress)))
+                .addGap(12, 12, 12))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,9 +292,13 @@ public class User_details extends javax.swing.JFrame {
                     .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_phoneNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_phoneNo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                    .addComponent(lbl_phoneNo)
+                    .addComponent(txt_phoneNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_hospAddress)
+                    .addComponent(txt_hospAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_LogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -302,7 +339,7 @@ public class User_details extends javax.swing.JFrame {
                 .addComponent(lbl_exit)
                 .addGap(8, 8, 8)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -351,6 +388,10 @@ public class User_details extends javax.swing.JFrame {
         new Welcome2().setVisible(true);
     }//GEN-LAST:event_btn_LogOutMouseClicked
 
+    private void txt_hospAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_hospAddressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_hospAddressActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -396,6 +437,7 @@ public class User_details extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_age;
     private javax.swing.JLabel lbl_email;
     private javax.swing.JLabel lbl_exit;
+    private javax.swing.JLabel lbl_hospAddress;
     private javax.swing.JLabel lbl_name;
     private javax.swing.JLabel lbl_phoneNo;
     private javax.swing.JLabel lbl_sex;
@@ -403,6 +445,7 @@ public class User_details extends javax.swing.JFrame {
     private javax.swing.JTextField txt_address;
     private javax.swing.JTextField txt_age;
     private javax.swing.JTextField txt_email;
+    private javax.swing.JTextField txt_hospAddress;
     private javax.swing.JTextField txt_name;
     private javax.swing.JTextField txt_phoneNo;
     private javax.swing.JTextField txt_sex;
