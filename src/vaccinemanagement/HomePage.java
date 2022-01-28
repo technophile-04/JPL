@@ -377,7 +377,7 @@ public class HomePage extends javax.swing.JFrame {
                 ps=con.prepareStatement(sql_decrementStock);
                 ps.executeUpdate();
                 //Updating user vaccination date
-                String sql_SetDate = "UPDATE USER set vaccination_date = '2002-08-04', h_id=1 where u_id = ?";
+                String sql_SetDate = "UPDATE USER set vaccination_date = '2021-01-30', h_id=1 where u_id = ?";
                 ps=con.prepareStatement(sql_SetDate);
                 ps.setInt(1, LoginSession.u_id);
                 ps.executeUpdate();
@@ -422,7 +422,7 @@ public class HomePage extends javax.swing.JFrame {
                 ps=con.prepareStatement(sql_decrementStock);
                 ps.executeUpdate();
                 //Updating user vaccination date
-                String sql_SetDate = "UPDATE USER set vaccination_date = '2002-08-04',h_id=2 where u_id = ?";
+                String sql_SetDate = "UPDATE USER set vaccination_date = '2021-01-30',h_id=2 where u_id = ?";
                 ps=con.prepareStatement(sql_SetDate);
                 ps.setInt(1, LoginSession.u_id);
                 ps.executeUpdate();
@@ -462,7 +462,7 @@ public class HomePage extends javax.swing.JFrame {
                 ps=con.prepareStatement(sql_decrementStock);
                 ps.executeUpdate();
                 //Updating user vaccination date
-                String sql_SetDate = "UPDATE USER set vaccination_date = '2002-08-04', h_id=3 where u_id = ?";
+                String sql_SetDate = "UPDATE USER set vaccination_date = '2021-01-30', h_id=3 where u_id = ?";
                 ps=con.prepareStatement(sql_SetDate);
                 ps.setInt(1, LoginSession.u_id);
                 ps.executeUpdate();

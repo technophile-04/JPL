@@ -106,7 +106,7 @@ public class Admin extends javax.swing.JFrame {
         jLabel2.setBackground(new java.awt.Color(0, 126, 200));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vaccinemanagement/admin.png"))); // NOI18N
 
-        logOutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vaccinemanagement/dfResized-removebg.png"))); // NOI18N
+        logOutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vaccinemanagement/logout-32.png"))); // NOI18N
         logOutBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logOutBtnMouseClicked(evt);
@@ -130,17 +130,19 @@ public class Admin extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(logOutBtn)
-                .addGap(31, 31, 31))
+                .addGap(32, 32, 32))
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(headerLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
+                        .addGap(19, 19, 19)
+                        .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(headerLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
                         .addComponent(logOutBtn)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -246,7 +248,7 @@ public class Admin extends javax.swing.JFrame {
     void getUsersTable(){
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=vaja3253");
-            String sql = "select * from USER";
+            String sql = "select u_id, first_name, last_name, email_id, address,phoneNumber,gender, vaccination_date, age  from USER";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 

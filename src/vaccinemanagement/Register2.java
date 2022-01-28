@@ -59,6 +59,9 @@ public class Register2 extends javax.swing.JFrame {
         btnRegister = new javax.swing.JButton();
         txtLastNameRegister = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtAge = new javax.swing.JTextField();
+        btnLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -131,7 +134,7 @@ public class Register2 extends javax.swing.JFrame {
                 txtSexRegisterActionPerformed(evt);
             }
         });
-        jPanel3.add(txtSexRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 210, 39));
+        jPanel3.add(txtSexRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 210, 39));
 
         txtPhoneRegister.setFont(new java.awt.Font("STIXGeneral", 0, 14)); // NOI18N
         txtPhoneRegister.setForeground(new java.awt.Color(51, 51, 51));
@@ -142,16 +145,21 @@ public class Register2 extends javax.swing.JFrame {
                 txtPhoneRegisterMouseClicked(evt);
             }
         });
-        jPanel3.add(txtPhoneRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, 220, 39));
+        txtPhoneRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPhoneRegisterActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtPhoneRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 210, 39));
 
         jLabel3.setText("Email Id");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 80, 39));
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 80, 39));
 
         jLabel4.setText("Sex");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 45, 39));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 45, 39));
 
         jLabel5.setText("Address");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 65, 39));
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 280, 65, 39));
 
         txtAddressRegister.setColumns(20);
         txtAddressRegister.setLineWrap(true);
@@ -159,10 +167,10 @@ public class Register2 extends javax.swing.JFrame {
         txtAddressRegister.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 108, 204)));
         jScrollPane1.setViewportView(txtAddressRegister);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 548, 39));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, 220, 39));
 
         jLabel7.setText("First Name");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 36, 80, 39));
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 80, 39));
 
         txtEmailRegister.setFont(new java.awt.Font("STIXGeneral", 0, 14)); // NOI18N
         txtEmailRegister.setForeground(new java.awt.Color(51, 51, 51));
@@ -174,7 +182,7 @@ public class Register2 extends javax.swing.JFrame {
                 txtEmailRegisterMouseClicked(evt);
             }
         });
-        jPanel3.add(txtEmailRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 201, 39));
+        jPanel3.add(txtEmailRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 201, 39));
 
         txtPasswordRegister.setText("jPasswordField2");
         txtPasswordRegister.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 181, 204)));
@@ -186,10 +194,10 @@ public class Register2 extends javax.swing.JFrame {
         jPanel3.add(txtPasswordRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 200, 30));
 
         jLabel6.setText("Phone No");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 120, -1));
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 120, -1));
 
         jLabel8.setText("Password");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 120, -1));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 120, -1));
 
         btnRegister.setBackground(new java.awt.Color(255, 255, 255));
         btnRegister.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -201,7 +209,7 @@ public class Register2 extends javax.swing.JFrame {
                 btnRegisterMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, 130, 40));
+        jPanel3.add(btnRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 130, 40));
 
         txtLastNameRegister.setFont(new java.awt.Font("STIXGeneral", 0, 14)); // NOI18N
         txtLastNameRegister.setForeground(new java.awt.Color(51, 51, 51));
@@ -217,10 +225,41 @@ public class Register2 extends javax.swing.JFrame {
                 txtLastNameRegisterActionPerformed(evt);
             }
         });
-        jPanel3.add(txtLastNameRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, 190, 39));
+        jPanel3.add(txtLastNameRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 210, 39));
 
         jLabel9.setText("Last Name");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 80, 39));
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 40, 80, 39));
+
+        jLabel10.setText("Age");
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 65, 39));
+
+        txtAge.setFont(new java.awt.Font("STIXGeneral", 0, 14)); // NOI18N
+        txtAge.setForeground(new java.awt.Color(51, 51, 51));
+        txtAge.setText("Enter Age...");
+        txtAge.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 181, 204)));
+        txtAge.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtAgeMouseClicked(evt);
+            }
+        });
+        txtAge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAgeActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 200, 39));
+
+        btnLogin.setBackground(new java.awt.Color(255, 255, 255));
+        btnLogin.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnLogin.setForeground(new java.awt.Color(0, 181, 204));
+        btnLogin.setText("Back");
+        btnLogin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 181, 204), 1, true));
+        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLoginMouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, 130, 40));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 720, 440));
 
@@ -265,7 +304,18 @@ public class Register2 extends javax.swing.JFrame {
         String sex=txtSexRegister.getText();
         String password=txtPasswordRegister.getText();
         String phone=txtPhoneRegister.getText();
-       int PhoneNo;
+           
+        String address=txtAddressRegister.getText();
+        String email=txtEmailRegister.getText();
+        
+        if(lastName.equals("")||firstName.equals("")||sex.equals("")||password.equals("")||address.equals("")||email.equals(""))
+        {
+            JOptionPane.showMessageDialog(this, "Fill in all the Fields!");
+            System.out.println("Mabsj");
+            return ;
+        }
+        
+        int PhoneNo;
         PhoneNo = 0;
        try{
         PhoneNo=Integer.parseInt(txtPhoneRegister.getText());
@@ -274,16 +324,16 @@ public class Register2 extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(this, "Enter a valid Phone Number");
            return ;
        }
-           
-        String address=txtAddressRegister.getText();
-        String email=txtEmailRegister.getText();
-        
-        if(lastName.equals("")||firstName.equals("")||sex.equals("")||password.equals("")||phone.equals("")||address.equals("")||email.equals(""))
-        {
-            JOptionPane.showMessageDialog(this, "Fill in all the Fields!");
-            System.out.println("Mabsj");
-            return ;
-        }
+       
+       int age;
+        age = 0;
+       try{
+        age=Integer.parseInt(txtAge.getText());
+       }catch(Exception e)
+       {
+           JOptionPane.showMessageDialog(this, "Enter a valid Age");
+           return ;
+       }
         
          if(!valEmail(email))
         {
@@ -294,18 +344,19 @@ public class Register2 extends javax.swing.JFrame {
        
         
              try {
-                 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=vaja3253");
-                 ps=con.prepareStatement("insert into user(last_name,first_name,email_id,password,address,phoneNumber,gender, age) values(?,?,?,?,?,?,?, 19)");
-            ps.setString(1, lastName);
-            ps.setString(2, firstName);
-            ps.setString(3, email);
-            ps.setString(4, password);
-            ps.setString(5, address);
-            ps.setInt(6, PhoneNo);
-            ps.setString(7, sex);
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(Register2.this,"User added");
-             } catch (SQLException ex) {
+                con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Vaccine_Management?user=root&password=vaja3253");
+                ps=con.prepareStatement("insert into user(last_name,first_name,email_id,password,address,phoneNumber,gender, age) values(?,?,?,?,?,?,?, ?)");
+                ps.setString(1, lastName);
+                ps.setString(2, firstName);
+                ps.setString(3, email);
+                ps.setString(4, password);
+                ps.setString(5, address);
+                ps.setInt(6, PhoneNo);
+                ps.setString(7, sex);
+                 ps.setInt(8, age);
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(Register2.this,"User added");
+             }catch (SQLException ex) {
                  Logger.getLogger(Register2.class.getName()).log(Level.SEVERE, null, ex);
                  
              }
@@ -338,6 +389,25 @@ public class Register2 extends javax.swing.JFrame {
         // TODO add your handling code here:
         txtPhoneRegister.setText("");
     }//GEN-LAST:event_txtPhoneRegisterMouseClicked
+
+    private void txtAgeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAgeMouseClicked
+        // TODO add your handling code here:
+        txtAge.setText("");
+    }//GEN-LAST:event_txtAgeMouseClicked
+
+    private void txtAgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAgeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAgeActionPerformed
+
+    private void txtPhoneRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneRegisterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPhoneRegisterActionPerformed
+
+    private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        new Welcome2().setVisible(true);
+    }//GEN-LAST:event_btnLoginMouseClicked
 
     /**
      * @param args the command line arguments
@@ -375,8 +445,10 @@ public class Register2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRegister;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -389,6 +461,7 @@ public class Register2 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblRegisterIcon;
     private javax.swing.JTextArea txtAddressRegister;
+    private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtEmailRegister;
     private javax.swing.JTextField txtFirstNameRegister;
     private javax.swing.JTextField txtLastNameRegister;

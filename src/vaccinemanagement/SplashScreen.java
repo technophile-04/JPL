@@ -63,8 +63,8 @@ public class SplashScreen extends javax.swing.JFrame {
 
         Name.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         Name.setForeground(new java.awt.Color(255, 255, 255));
-        Name.setText("Vaccine Mangement System");
-        BackGrounPanel.add(Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, -1, -1));
+        Name.setText("Vaccine Booking System");
+        BackGrounPanel.add(Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, -1, -1));
 
         LoadingValue.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         LoadingValue.setForeground(new java.awt.Color(255, 255, 255));
