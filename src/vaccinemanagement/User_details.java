@@ -45,7 +45,7 @@ public class User_details extends javax.swing.JFrame {
                 txt_age.setText(rs.getString("age"));
                 txt_name.setText(rs.getString("first_name")+" "+rs.getString("last_name"));
                 txt_email.setText(rs.getString("email_id"));
-                txt_phoneNo.setText(String.valueOf(rs.getInt("phoneNumber")));
+                txt_phoneNo.setText(String.valueOf(rs.getLong("phoneNumber")));
                 txt_sex.setText(rs.getString("gender"));
                 if(rs.getString("vaccination_date") == null){
                 txt_vaccinationStatus.setText("Please book a slot");

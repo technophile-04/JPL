@@ -268,7 +268,6 @@ public class Register2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    
     public static boolean valEmail(String input)
     {
         String emailRegex= "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
@@ -315,13 +314,21 @@ public class Register2 extends javax.swing.JFrame {
             return ;
         }
         
-        int PhoneNo;
+        
+        
+        long  PhoneNo;
         PhoneNo = 0;
        try{
-        PhoneNo=Integer.parseInt(txtPhoneRegister.getText());
+        PhoneNo= Long.parseLong(txtPhoneRegister.getText());
        }catch(Exception e)
        {
+           System.out.println("The ophoe: "+PhoneNo);
            JOptionPane.showMessageDialog(this, "Enter a valid Phone Number");
+           return ;
+       }
+       
+       if(phone.length() != 10){
+           JOptionPane.showMessageDialog(this, "Enter a 10 digit Phone Number");
            return ;
        }
        
@@ -334,7 +341,12 @@ public class Register2 extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(this, "Enter a valid Age");
            return ;
        }
-        
+       
+       if(age < 0){
+           JOptionPane.showMessageDialog(this, "Enter a positive Age");
+           return;
+       }
+       
          if(!valEmail(email))
         {
             JOptionPane.showMessageDialog(Register2.this, "Enter a valid Email");
@@ -351,18 +363,20 @@ public class Register2 extends javax.swing.JFrame {
                 ps.setString(3, email);
                 ps.setString(4, password);
                 ps.setString(5, address);
-                ps.setInt(6, PhoneNo);
+                ps.setLong(6, PhoneNo);
                 ps.setString(7, sex);
                  ps.setInt(8, age);
                 ps.executeUpdate();
                 JOptionPane.showMessageDialog(Register2.this,"User added");
+                this.dispose();
+                new Welcome2().setVisible(true);
              }catch (SQLException ex) {
+                 JOptionPane.showMessageDialog(Register2.this,"Email id is already registered");
                  Logger.getLogger(Register2.class.getName()).log(Level.SEVERE, null, ex);
                  
              }
         
-        this.dispose();
-        new Welcome2().setVisible(true);
+        
     }//GEN-LAST:event_btnRegisterMouseClicked
 
     private void txtFirstNameRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFirstNameRegisterMouseClicked
